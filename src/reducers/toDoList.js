@@ -3,9 +3,6 @@ const toDoList = (state = [], action) => {
         case 'AddToList':
 
             return [...state, action.list]
-
-        case 'selectList':
-            action.checkOnOff === 'on' ?
         default: return state
     }
 }

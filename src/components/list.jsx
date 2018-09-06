@@ -1,15 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { selectList } from '../actions'
+
 const ListLayout = (props) => {
     const handleOnclick = (e) => {
-        console.log(e.target.value)
-        props.selectList(props.list, e.target.value)
+        console.log(e.target.checked)
+        props.handleSelected(props.list, e.target.checked);
     }
+
     return (
 
         <React.Fragment>
-            <input type="checkbox" onClick={handleOnclick} /><div> {props.list}</div>
+            <input type="checkbox" onClick={handleOnclick} /><span> {props.list}</span><br/>
         </React.Fragment>
 
 
@@ -17,8 +17,4 @@ const ListLayout = (props) => {
     )
 }
 
-const MSTP = state => ({});
-const MDTP = dispatch => ({
-    selectList: (selecedList, checkOnOff) => dispatch(selectList(selecedList, checkOnOff))
-})
-export default connect(MSTP, MDTP)(ListLayout);
+export default ListLayout;

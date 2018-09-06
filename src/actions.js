@@ -3,8 +3,14 @@ export const addToList = (list) => ({
     list
 })
 
-export const selectList = (list, checkOnOff) => ({
-    type: 'SelectList',
+export const addToDone = (list, checked) => ({
+    type: 'addToDone',
     list,
-    checkOnOff
+    checked
+})
+
+export const removeFromDone = (list, checked) => ({
+    type: 'removeFromDone',
+    list,
+    checked
 })
