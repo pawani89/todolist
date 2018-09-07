@@ -11,7 +11,7 @@ class InputList extends Component {
         }
     }
     addToList = () => {
-        this.props.addToList(this.state.listData);
+        this.props.addToList(this.state.listData, false);
     }
     handleListData = (e) => {
         let listData = e.target.value;
@@ -32,6 +32,6 @@ class InputList extends Component {
 }
 const mstp = state => ({})
 const mdtp = dispatch => ({
-    addToList: (listData) => dispatch(addToList(listData))
+    addToList: (listData,checked) => dispatch(addToList(listData,checked))
 })
 export default connect(mstp, mdtp)(InputList)

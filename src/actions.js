@@ -1,16 +1,15 @@
-export const addToList = (list) => ({
+export const addToList = (data,checked) => ({
     type: 'AddToList',
-    list
+    data,checked
 })
 
-export const addToDone = (list, checked) => ({
+export const addToDone = (data,checked) => ({
     type: 'addToDone',
-    list,
-    checked
+    data,checked
 })
 
-export const removeFromDone = (list, checked) => ({
+export const removeFromDone = (data, checked) => ({
     type: 'removeFromDone',
-    list,
+    data,
     checked
 })
