@@ -3,13 +3,13 @@ export const addToList = (data,checked) => ({
     data,checked
 })
 
-export const addToDone = (data,checked) => ({
+export const addToDone = (data,checked,key) => ({
     type: 'addToDone',
-    data,checked
+    data,checked,key
 })
 
-export const removeFromDone = (data, checked) => ({
+export const removeFromDone = (data, checked,key) => ({
     type: 'removeFromDone',
     data,
-    checked
+    checked,key
 })

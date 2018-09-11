@@ -21,21 +21,15 @@ class Home extends Component {
     handleClick=(span)=>{
         
     
-        if (span.target.innerHTML=== 'All    '){
-            
-            console.log("akansha", span.target.innerHTML)
+        if (span.target.innerHTML=== 'All    '){  
             this.setState({
                 listSelected : 'all'
             })
         }else if (span.target.innerHTML === 'Done    '){
-            console.log("akansha", span.target.innerHTML)
-
             this.setState({
                 listSelected : 'done'
             })
         }else{
-            console.log("akansha", span.target.innerHTML)
-
             this.setState({
                 listSelected : 'notdone'
             })
@@ -43,40 +37,20 @@ class Home extends Component {
 
 
     }
-    handleSelected=(selectedData, checkStatus)=>{
+    handleSelected=(selectedData, checkStatus,key)=>{
         let data = {
             list: selectedData,
             checked: checkStatus
         }
         if (checkStatus === true){
-            //this.props.addToDone(data)
-            this.props.addToDone(selectedData,checkStatus)
+            this.props.addToDone(selectedData,checkStatus,key)
         }else {
-            this.props.removeFromDone(selectedData,checkStatus)
+            this.props.removeFromDone(selectedData,checkStatus,key)
         }
 
     }
     render() {
-        // console.log("akansha 1", this.props.listData)
-        // console.log('akansha 2', this.props.slectedDataList)
-        // console.log("akansha 3", this.state.listSelected)
-     if (this.state.listSelected === "all"){
-const all = this.props.listData.map((obj, key) =>  (
-    <List list={obj} handleSelected= {this.handleSelected}/>   
-))
-     }else if (this.state.listSelected === "done"){
-const done = this.props.slectedDataList.map((obj, key) => (
-                 
-    <List list={obj} handleSelected= {this.handleSelected}/>
-
-))
-     }else {
-const notDone = this.props.listData.filter(f => !this.props.slectedDataList.includes(f)).map((obj, key) => (
-                 
-    <List list={obj} handleSelected= {this.handleSelected}/>
-
-))
-     }
+ 
         return (
             <React.Fragment>
                 <h1>TO DO LIST:-</h1>
@@ -88,13 +62,13 @@ const notDone = this.props.listData.filter(f => !this.props.slectedDataList.incl
                 {this.state.listSelected === "all" && (this.props.listData.map((obj, key) =>  (
     <List list={obj} handleSelected= {this.handleSelected}/>   
 )))}
-                {this.state.listSelected === "done" && (this.props.slectedDataList.map((obj, key) => (
+                {this.state.listSelected === "done" && (this.props.listData.filter((obj)=> obj.checked === true).map((obj, key) => (
                  
                  <List list={obj} handleSelected= {this.handleSelected}/>
              
              )))}
-                {this.state.listSelected === "notdone" && (this.props.listData.filter(f => !this.props.slectedDataList.includes(f)).map((obj, key) => (
-                 
+                {this.state.listSelected === "notdone" && (this.props.listData.filter((obj)=> obj.checked === false).map((obj, key) => (
+              
                  <List list={obj} handleSelected= {this.handleSelected}/>
              
              )))}
@@ -108,12 +82,12 @@ const notDone = this.props.listData.filter(f => !this.props.slectedDataList.incl
 
 const mstp = state => ({
     listData: state.toDoList,
-    slectedDataList : state.selectedList
+   // listData : state.selectedList
 
 })
 const mdtp = dispatch =>({
     //earlier i was not sending the second parameter while calling dispatch, to dispatch the actions.
-    addToDone : (donedata,checked)=>dispatch(addToDone(donedata,checked)),
-    removeFromDone : (donedata,checked)=>dispatch(removeFromDone(donedata,checked))
+    addToDone : (donedata,checked,key)=>dispatch(addToDone(donedata,checked)),
+    removeFromDone : (donedata,checked,key)=>dispatch(removeFromDone(donedata,checked))
 })
 export default connect(mstp, mdtp)(Home)
